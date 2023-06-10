@@ -1,0 +1,226 @@
+{% extends 'waitlist/base.html' %}
+{% load static %}
+{% block title %}Denrel's Clinic{% endblock  %}
+
+
+{% block body %}
+
+<body class="bg-green-800 font-Poppins">
+
+    <!-- NAVBAR -->
+    <nav class="relative container p-5 md:mx-auto md:p-6 ">
+        <div class="flex items-center justify-between text-amber-200">
+            <!-- Logo/Brand -->
+            <div class="ml-8 mt-1 mb-0 relative">
+                <h1 class="inline-block uppercase font-semibold text-4xl m-0 pt-3">DESA</h1>
+                <ion-icon name="add" 
+                class="justify-start text-amber-500 font-bold align-top text-4xl m-0 pl-0 absolute left-20 -top-1"></ion-icon>
+                <h4 class="absolute -bottom-4 uppercase ml-5 m-0 p-0 font-semibold">CLINIC</h4>
+            </div>
+            <!-- Menu Items -->
+            <div class="hidden ml-10 mr-0 md:flex space-x-6">
+                <a href="{% url 'waitlist:home' %}" class="hover:text-amber-600 p-3 text-xl uppercase">Home</a>
+                <a 
+                href="{% url 'waitlist:doctors' %}"
+                class="hover:text-amber-600 p-3 text-xl uppercase">Doctors</a>
+                <a href="{% url 'waitlist:contact' %}" class="hover:text-amber-600 p-3 text-xl uppercase">Contact</a>
+                <a href="https://maps.google.com/" class="hover:text-amber-600 p-3 text-xl uppercase"
+                 >Map</a>
+            </div>       
+            <!-- Hambuger Icon -->
+            <button id="menu-btn" 
+            class="block hamburger md:hidden focus:outline-none pr-0 mr-0">
+                <span class="hamburger-top"></span>
+                <span class="hamburger-middle"></span>
+                <span class="hamburger-bottom"></span>
+            </button>
+            <!-- Mobile Menu -->
+            <div class="md:hidden">
+                <div id="menu" 
+                class="hidden absolute flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md">
+                <a href="{% url 'waitlist:home' %}">Home</a>
+                <a href="{% url 'waitlist:doctors' %}" >Doctors</a>
+                <a href="{% url 'waitlist:contact' %}">Contact</a>
+                <a href="https://maps.google.com/"
+                target = "_blank">Map</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTACT SECTION -->
+    <section id="Contact" class="w-5/6 mx-auto">
+        <!-- Title -->
+        <div class="container flex items-center text-center mx-auto mt-8 justify-around">
+            <h1 class="text-3xl text-amber-500 font-semibold">GET IN TOUCH</h1>
+        </div>
+        <!-- Cards-->
+        <div 
+        class="text-amber-500 container flex flex-col md:flex-row justify-around items-center mx-auto mt-14">
+            <div class="flex flex-col pt-2 items-center">
+                <!-- <img src="./images/address.svg" alt="" 
+                class=""> -->
+                <ion-icon name="home" 
+                class="text-4xl text-amber-300 rounded-full bg-green-600 p-4 mb-3" id="hook"></ion-icon>
+                
+                <span 
+                class="text-3xl font-semibold uppercase sm:text-2xl"
+                >ADDRESS</span>
+
+                <div class="items-center text-center pt-3">
+                    <p class="font-bold">DESA CLINIC</p>
+                    <p>12 Victoria Island, Lagos</p>
+                </div>
+                
+            </div>
+            <div class="flex flex-col pt-2 items-center">
+                <!-- <img src="./images/phone.svg" alt="" 
+                class=""> -->
+                <ion-icon name="call" 
+                class="text-4xl text-amber-300 rounded-full bg-green-600 p-4 mb-3"></ion-icon>
+                
+                 <span 
+                class="text-3xl font-semibold uppercase sm:text-2xl"
+                >PHONE</span>
+                <div class="items-center text-center pt-3">
+                    <p class="font-bold">+2347034567890</p>
+                    <p>+234350000000 (For emergency)</p>
+                </div>
+            </div>
+            <div class="flex flex-col pt-2 items-center">
+                <!-- <img src="./images/mail.svg" alt="" 
+                class=""> -->
+
+                <ion-icon name="mail" 
+                class="text-4xl text-amber-300 rounded-full bg-green-600 p-4 mb-3"></ion-icon>
+                
+
+                 <span 
+                class="text-3xl font-semibold uppercase sm:text-2xl"
+                >EMAIL</span>
+                <div class="items-center text-center pt-3">
+                    <p class="font-bold">desaclinic@gmail.com</p>
+                </div>
+            </div>
+        </div>  
+    </section>
+
+    <!-- Message and Form -->
+    <section class="bg-stone-300 mt-20 pb-10">
+        <div class="container mx-auto mt-14 pt-8 flex flex-col md:flex-row justify-between">
+            <!-- Message -->
+            <div class="container flex flex-col mx-auto pt-10 mt-10 md:pl-20 w-1/2">
+                <h1 class="text-3xl font-bold text-amber-700">Message Us</h1>
+                {% if msg %}
+                    <p class="text-2xl font-semibold text-amber-950">{{ msg }}</p>
+                {% else %}
+                    <p class="text-2xl font-semibold text-amber-950">Send us a message</p>
+                    <p class="text-xl text-amber-950">We aim to reply in two business days</p>
+                {% endif %}
+            </div>
+            <!-- Form -->
+            <form action="" class="font-Dosis w-1/2 text-purple-950 grid gap-6 mb-6 mt-10 sm:mx-auto">
+                {% csrf_token %}
+                
+                <div class="flex flex-col items-start">
+                    <label for="firstname" class="text-red-950 font-semibold text-xl">First name</label> 
+                    <input type="text" 
+                    class="bg-gray-50 border border-gray-400 text-sm rounded-sm
+                    w-4/5 p-2 focus:outline-none focus:border-purple-900"
+                    placeholder="Firstname">
+                </div>
+                
+                <div class="flex flex-col items-start">
+                    <label for="lastname" class="text-red-950 font-semibold text-xl">Last name</label> 
+                    <input type="text" 
+                    class="bg-gray-50 border border-gray-400 text-sm rounded-sm
+                        w-4/5 p-2 focus:outline-none focus:border-purple-900"
+                        name="firstname"
+                    placeholder="Lastname">
+                </div>
+
+                <div class="flex flex-col items-start">
+                    <label for="Email" class="text-red-950 font-semibold text-xl">Email</label> 
+                    <input type="text" 
+                    class="bg-gray-50 border border-gray-400 text-sm rounded-sm
+                        w-4/5 p-2 focus:outline-none focus:border-purple-900"
+                    placeholder="example@hello.com">
+                </div>
+
+                <div class="flex flex-col items-start">
+                    <label for="Email" class="text-red-950 font-semibold text-xl">Patient Number</label> 
+                    <input type="text" 
+                    class="bg-gray-50 border border-gray-400 text-sm rounded-sm
+                        w-4/5 p-2 focus:outline-none focus:border-purple-900"
+                    placeholder="Patient Number">
+                </div>
+
+                <div class="flex flex-col items-start">
+                    <label for="Message" class="text-red-950 font-semibold text-2xl">
+                        Message
+                    </label> 
+                    <textarea rows="2"
+                    class="text-purple-950 bg-gray-50 border border-gray-400 text-sm rounded-sm
+                    w-4/5 p-3 focus:outline-none focus:border-purple-900" placeholder="Enter a message"></textarea>
+                </div>    
+                <!-- Submit Button -->
+                <div class="flex ">
+                    <button 
+                    class="text-white mt-2 mr-6 rounded-sm px-12 py-2 bg-amber-700 hover:bg-stone-600 focus:outline-none">
+                        Submit Message
+                    </button>
+                </div>
+            </form>
+        </div>
+        
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-green-800">
+        <!-- Flex-Container -->
+        <div class="container flex flex-col-reverse justify-between px-6 py-8 mx-auto space-y-8 md:flex-row md:space-y-0">
+            <!-- Logo and Social Links -->
+            <div class="flex flex-col-reverse items-center justify-between space-y-8 md:flex-row md:space-x-6 md:space-y-4 md:items-start">
+                <!-- Logo -->
+                <div>
+                    <ion-icon name="medical-outline" class="text-2xl"></ion-icon>
+                    <span 
+                    class="text-2xl uppercase font-semibold"
+                    >Desa Clinic</span>
+                </div>
+                <!-- Social Links Container -->
+                
+                
+            </div>
+
+            <div class="space-x-4 text-2xl">
+                <a href="https://www.facebook.com">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                </a>
+                <a href="https://www.linkedin.com">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                </a>
+                <a href="https://www.youtube.com">
+                    <ion-icon name="logo-youtube"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+            </div>
+            <!-- Copyright -->
+            <div class="hidden md:block">
+                Copyright &copy; 2023, All Rights Reserved
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Ion Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Own Script -->
+    <script src="{% static 'waitlist/js/script.js' %}"></script>
+</body>
+{% endblock %}

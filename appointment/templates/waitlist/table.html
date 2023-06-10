@@ -1,0 +1,62 @@
+{% extends 'waitlist/base.html' %} {% load static %} {% block title %}Waiting
+List{% endblock %} {% block body %}
+
+<body class="bg-blue-600 h-screen font-Poppins">
+  <div
+    class="relative flex items-center self-end justify-between container p-3 md:mx-auto md:p-6 mb-10 md:pl-12"
+  >
+    <div>
+      <h1 class="text-xl font-semibold uppercase sm:text-xl text-white">
+        Check-in List
+      </h1>
+    </div>
+  </div>
+  <div class="overflow-auto mx-auto rounded-lg w-11/12 md:w-8/12 min-h-[50%]">
+    <table class="shadow-2xl border-2 border-blue-200 overflow-hidden w-full">
+      <thead class="text-white border-b-2 text-sm md:text-2xl">
+        <tr>
+          <th
+            class="w-32 p-3 bg-blue-800 font-semibold tracking-wide text-center whitespace-nowrap"
+          >
+            HOSP. NO
+          </th>
+          <th
+            class="w-32 p-3 bg-blue-800 border-l-2 border-r-2 font-semibold tracking-wide text-center whitespace-nowrap"
+          >
+            DOCTOR
+          </th>
+          <th
+            class="w-32 p-3 bg-blue-800 font-semibold tracking-wide text-center whitespace-nowrap"
+          >
+            TIME
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-700 text-white text-center">
+        {% if patients %} {% for patient in patients %}
+        <tr
+          class="bg-blue-400 hover:bg-blue-100 hover:scale-105 hover:text-black cursor-pointer duration-300"
+        >
+          <td class="py-3 px-6 text-md">{{ patient.patient_no }}</td>
+          <td class="py-3 px-6 text-md">{{ patient.doctor }}</td>
+          <td class="py-3 px-6 text-md">
+            {{ patient.appoint_time|date:"h:i a" }}
+          </td>
+        </tr>
+        {% endfor %} {% endif %}
+      </tbody>
+    </table>
+  </div>
+  <div class="flex mx-auto container mt-32 w-11/12 md:w-9/12">
+    <div class="flex-1 w-64"></div>
+    <div class="flex-2 w-32">
+      <a
+        href="{% url 'waitlist:home' %}"
+        class="block p-1 text-white text-center text-xl bg-red-800 rounded-full hover:bg-stone-500"
+        >Home</a
+      >
+    </div>
+  </div>
+</body>
+
+{% endblock %}
